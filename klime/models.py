@@ -13,3 +13,10 @@ class Wall(models.Model):
 
     def __str__(self):
         return self.name
+class Problem(models.Model):
+    name = models.CharField(max_length=50)
+    vectors = models.CharField(max_length=1000)
+    wall_id = models.ForeignKey(Wall, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name

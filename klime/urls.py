@@ -21,5 +21,6 @@ from klime import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', views.user_list),
-    path('walls/', views.wall_list)
+    path('walls/', views.wall_list),
+    path('problems/', views.problem_list)
 ]
