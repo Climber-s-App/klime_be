@@ -1,4 +1,4 @@
 import pytest
 
-def test_example():
-  assert 1 == 1
+class TestWallModel:
+    def test_str_return(self, wall_factory)
