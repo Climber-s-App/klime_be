@@ -1,6 +1,6 @@
-from pytest_factoryboy import register
+# from pytest_factoryboy import register
 
-from .factories import WallFactory
+# from .factories import WallFactory
 
-register(WallFactory)
+# register(WallFactory)
 
