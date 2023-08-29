@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'klimedb',       # Name of the PostgreSQL database
         'USER': 'juser',     # PostgreSQL username
         'PASSWORD': '',  # PostgreSQL password
-        'HOST': '/Users/jessethomas/anaconda3/etc',    # PostgreSQL server hostname (usually 'localhost')
+        'HOST': 'localhost',    # PostgreSQL server hostname (usually 'localhost')
         'PORT': '5432',         # PostgreSQL port (usually 5432)
     }
 }
