@@ -78,6 +78,7 @@ WSGI_APPLICATION = 'klime.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'klimedb',       # Name of the PostgreSQL database
@@ -85,6 +86,7 @@ DATABASES = {
         'PASSWORD': '',  # PostgreSQL password
         'HOST': '127.0.0.1',    # PostgreSQL server hostname (usually 'localhost')
         'PORT': '5432',         # PostgreSQL port (usually 5432)
+
     }
 }
 
