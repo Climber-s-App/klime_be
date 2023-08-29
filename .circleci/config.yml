@@ -22,5 +22,5 @@ jobs:
             # . .venv/bin/activate
             # python3 manage.py test
       - store_artifacts:
-          # path: test-reports/
-          # destination: python_app
+          path: test-reports/
+          destination: python_app
