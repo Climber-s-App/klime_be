@@ -1,6 +1,11 @@
-from pytest_factoryboy import register
+import pytest
 
-from .factories import WallFactory
+from django.contrib.auth.models import User
 
-register(WallFactory)
+
+# from pytest_factoryboy import register
+
+# from .factories import WallFactory
+
+# register(WallFactory)
 

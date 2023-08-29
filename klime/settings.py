@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'klime',
-    'rest_framework'
+    'rest_framework',
+    'pytest'
 ]
 
 MIDDLEWARE = [
