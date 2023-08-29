@@ -86,9 +86,9 @@ DATABASES = {
         'PASSWORD': '',  # PostgreSQL password
         'HOST': '127.0.0.1',    # PostgreSQL server hostname (usually 'localhost')
         'PORT': '5432',         # PostgreSQL port (usually 5432)
-
     }
 }
+
 
 
 # Password validation
