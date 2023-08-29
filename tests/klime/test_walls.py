@@ -1,6 +1,6 @@
 import pytest
 
-@pytest.fixture(scope='session')
+@pytest.fixture()
 def fixture_1():
     print("run-fixture-1")
     return 1
