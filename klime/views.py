@@ -7,19 +7,43 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-
+@api_view(["GET", "POST"])
 def user_list(request):
-    users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return JsonResponse({"data": serializer.data}, safe=False)
+    if request.method == "GET":
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return JsonResponse({"data": serializer.data}, safe=False)
+    elif request.method == 'POST':
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET', 'PUT', 'DELETE'])
 def user_details(request, user_id):
     try:
         user = User.objects.get(pk=user_id)
-        serializer = UserSerializer(user, many=False)
-        return JsonResponse({"data": serializer.data}, safe=False)
+
+        if request.method == 'GET':
+            user = User.objects.get(pk=user_id)
+            serializer = UserSerializer(user, many=False)
+            return JsonResponse({"data": serializer.data}, safe=False)
+
+        elif request.method == 'PUT':
+            serializer = UserSerializer(user, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse({"data": serializer.data}, safe=False)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        elif request.method == 'DELETE':
+            user.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
     except User.DoesNotExist:
-         return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
 
 # @api_view(['GET, POST'])
 def get_user_walls(request, user_id):
