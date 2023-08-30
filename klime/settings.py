@@ -25,8 +25,11 @@ SECRET_KEY = 'django-insecure-=l(1snhe+$ql91t)unpb3urbqm+lx!s)c-15@e#ob4d*s)m@64
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ['klime-be.onrender.com']
+#use for local testing
+# ALLOWED_HOSTS = []
+
+#use for deployment
+ALLOWED_HOSTS = ['klime-be.onrender.com']
 
 
 # Application definition
@@ -74,25 +77,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'klime.wsgi.application'
 
-
+# use for deployment
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         # Feel free to alter this value to suit your needs.
-#         default='postgresql://postgres:postgres@localhost:5432/mysite',
-#         conn_max_age=600
-#     )
-# }
-
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default='postgresql://postgres:postgres@localhost:5432/mysite',
+        conn_max_age=600
+    )
 }
+
+#use for local testing
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
