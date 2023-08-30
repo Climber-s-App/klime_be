@@ -31,7 +31,7 @@ DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 # ALLOWED_HOSTS = []
 
 #use for deployment
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").aplit(" ")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
