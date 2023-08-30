@@ -92,10 +92,10 @@ WSGI_APPLICATION = 'klime.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'klime_be',
-        'USER': 'postgres',
+        'NAME': 'klime_be_db',
+        'USER': 'klime_be_db_user',
         'PASSWORD': 'postgres',
-        'HOST': '',
+        'HOST': 'dpg-cjn8n9gcfp5c73frti8g-a.render.com',
         'PORT': '5432',
     }
 }
