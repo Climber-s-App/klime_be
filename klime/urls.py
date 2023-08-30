@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', views.user_list),
     path('users/<int:user_id>/', views.user_details),
-    path("users/<int:user_id>/walls/", views.get_user_walls),
+    path("users/<int:user_id>/walls/", views.user_walls),
     path("users/<int:user_id>/walls/<int:wall_id>/", views.get_user_wall_details),
     path("users/<int:user_id>/walls/<int:wall_id>/problems/", views.get_wall_problems),
     path("users/<int:user_id>/walls/<int:wall_id>/problems/<int:problem_id>/", views.get_wall_problem_details)

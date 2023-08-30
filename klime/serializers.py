@@ -7,7 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
 class WallSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wall
-        fields = ["id", "name", "photo_url", "user_id"]
+        fields = ["id", "name", "photo_url", "user"]
 class WallsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wall

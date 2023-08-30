@@ -45,18 +45,24 @@ def user_details(request, user_id):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-# @api_view(['GET, POST'])
-def get_user_walls(request, user_id):
-    user = User.objects.get(pk=user_id)
-    walls = user.wall_set
-    serializer = WallSerializer(walls, many=True)
-    return JsonResponse({"data": serializer.data}, safe=False)
+@api_view(['GET', 'POST'])
+def user_walls(request, user_id):
+    try:
+        user = User.objects.get(pk=user_id)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
-    # if request.method == "POST":
-    #     user = User.objects.get(pk=user_id)
-    #     walls = user.wall_set
-    #     serializer = WallSerializer(walls, many=True)
-    #     return JsonResponse({"data": serializer.data}, safe=False)
+    if request.method == "GET":
+        walls = user.wall_set.all()
+        serializer = WallSerializer(walls, many=True)
+        return JsonResponse({"data": serializer.data}, safe=False)
+
+    elif request.method == 'POST':
+        serializer = WallSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=user)
+            return Response({"message": "Wall created successfully"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def get_user_wall_details(request, user_id, wall_id):
     user = User.objects.get(pk=user_id)
