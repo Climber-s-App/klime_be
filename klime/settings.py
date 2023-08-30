@@ -83,6 +83,7 @@ DATABASES = {
         default='postgresql://postgres:postgres@localhost:5432/mysite',
         conn_max_age=600
     )
+
 }
 
 # Password validation
