@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import dj_database_url
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,16 +21,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=l(1snhe+$ql91t)unpb3urbqm+lx!s)c-15@e#ob4d*s)m@64'
+SECRET_KEY = os.environ.get("SECRET_KEY")
+#  'django-insecure-=l(1snhe+$ql91t)unpb3urbqm+lx!s)c-15@e#ob4d*s)m@64'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 #use for local testing
 # ALLOWED_HOSTS = []
 
 #use for deployment
-ALLOWED_HOSTS = ['klime-be.onrender.com']
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").aplit(" ")
 
 
 # Application definition
@@ -89,24 +91,30 @@ WSGI_APPLICATION = 'klime.wsgi.application'
 #     )
 # }
 
+# use for local testing
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'klime_be_db',
-        'USER': 'klime_be_db_user',
-        'PASSWORD': 'postgres',
-        'HOST': 'dpg-cjn8n9gcfp5c73frti8g-a.render.com',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-#use for local testing
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'klime_be_db',
+#         'USER': 'klime_be_db_user',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'dpg-cjn8n9gcfp5c73frti8g-a.render.com',
+#         'PORT': '5432',
 #     }
 # }
+
+database_url = os.environ.get("DATABASE_URL")
+DATABASES["default"] = dj_database_url.parse(database_url)
+
+#postgres://klime_be_db_user:kF8DsHGjDmNrKC42SpS5iEMRsokHqD6t@dpg-cjn8n9gcfp5c73frti8g-a.oregon-postgres.render.com/klime_be_db
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
