@@ -28,7 +28,8 @@ DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 
 # this variable is entered on Render database env. page
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+# ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -76,6 +77,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'klime.wsgi.application'
 
+# if ENV[:django_env] == "production"
+#     # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+#     # database_url = os.environ.get("DATABASE_URL")
+#     # DATABASES["default"] = dj_database_url.parse(database_url)
+# else
+#     ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+#     DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'klime_be_db',
+#         'USER': 'klime_be_db_user',
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
+
+
 # use for deployment
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -89,26 +109,26 @@ WSGI_APPLICATION = 'klime.wsgi.application'
 # }
 
 # use for local testing
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'klime_be_db',
-#         'USER': 'klime_be_db_user',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'dpg-cjn8n9gcfp5c73frti8g-a.render.com',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
-database_url = os.environ.get("DATABASE_URL")
-DATABASES["default"] = dj_database_url.parse(database_url)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'klime_be_db',
+        'USER': 'klime_be_db_user',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+# database_url = os.environ.get("DATABASE_URL")
+# DATABASES["default"] = dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
