@@ -20,17 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY WARNING: keep the secret key used in production secret! Variable set on Render.com
 SECRET_KEY = os.environ.get("SECRET_KEY")
-#  'django-insecure-=l(1snhe+$ql91t)unpb3urbqm+lx!s)c-15@e#ob4d*s)m@64'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: don't run with debug turned on in production! Variable set on Render.com
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-#use for local testing
-# ALLOWED_HOSTS = []
 
-#use for deployment
+# this variable is entered on Render database env. page
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
@@ -112,9 +109,6 @@ DATABASES = {
 
 database_url = os.environ.get("DATABASE_URL")
 DATABASES["default"] = dj_database_url.parse(database_url)
-
-#postgres://klime_be_db_user:kF8DsHGjDmNrKC42SpS5iEMRsokHqD6t@dpg-cjn8n9gcfp5c73frti8g-a.oregon-postgres.render.com/klime_be_db
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
