@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import dj_database_url
 import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret! Variable set on Render.com
-SECRET_KEY = os.environ.get("SECRET_KEY")
+# SECRET_KEY = os.environ.get("SECRET_KEY") - for render
+# SECRET_KEY = config('SECRET_KEY') - # for local
 
 # SECURITY WARNING: don't run with debug turned on in production! Variable set on Render.com
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
@@ -29,7 +31,7 @@ DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 # this variable is entered on Render database env. page
 # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -77,22 +79,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'klime.wsgi.application'
 
-# if ENV[:django_env] == "production"
-#     # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
-#     # database_url = os.environ.get("DATABASE_URL")
-#     # DATABASES["default"] = dj_database_url.parse(database_url)
-# else
-#     ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-#     DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'klime_be_db',
-#         'USER': 'klime_be_db_user',
-#         'PASSWORD': 'password',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
+if os.environ.get("ENVIRONEMT") == "production":
+    ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    database_url = os.environ.get("DATABASE_URL")
+    DATABASES = {
+        'default': dj_database_url.parse(database_url)
+    }
+else:
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+    SECRET_KEY = config('SECRET_KEY')
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'klime_be_db',
+        'USER': 'klime_be_db_user',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 
 
@@ -116,16 +122,16 @@ WSGI_APPLICATION = 'klime.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'klime_be_db',
-        'USER': 'klime_be_db_user',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'klime_be_db',
+#         'USER': 'klime_be_db_user',
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 # database_url = os.environ.get("DATABASE_URL")
 # DATABASES["default"] = dj_database_url.parse(database_url)
