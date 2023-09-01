@@ -79,7 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'klime.wsgi.application'
 
-if os.environ.get("ENVIRONEMT") == "production":
+if os.environ.get("ENVIRONMENT") == "production":
     try:
         ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS")
         SECRET_KEY = os.environ.get("SECRET_KEY")
