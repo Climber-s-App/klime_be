@@ -80,12 +80,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'klime.wsgi.application'
 
 if os.environ.get("ENVIRONEMT") == "production":
-    ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
-    SECRET_KEY = os.environ.get("SECRET_KEY")
-    database_url = os.environ.get("DATABASE_URL")
-    DATABASES = {
-        'default': dj_database_url.parse(database_url)
-    }
+    try:
+        ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS")
+        SECRET_KEY = os.environ.get("SECRET_KEY")
+        database_url = os.environ.get("DATABASE_URL")
+        DATABASES = {
+            'default': dj_database_url.parse(database_url)
+        }
+    except (AttributeError, ValueError) as e:
+        print(f"Error setting production environment variables: {e}")
+        raise
 else:
     ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
     SECRET_KEY = config('SECRET_KEY')
