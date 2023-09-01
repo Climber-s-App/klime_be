@@ -69,6 +69,7 @@ WSGI_APPLICATION = 'klime.wsgi.application'
 
 if os.environ.get("ENVIRONMENT") == "production":
     try:
+        DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
         ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
         SECRET_KEY = os.environ.get("SECRET_KEY")
         database_url = os.environ.get("DATABASE_URL")
@@ -79,6 +80,7 @@ if os.environ.get("ENVIRONMENT") == "production":
         print(f"Error setting production environment variables: {e}")
         raise
 else:
+    DEBUG = "true"
     ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
     SECRET_KEY = config('SECRET_KEY')
     DATABASES = {

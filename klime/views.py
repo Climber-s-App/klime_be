@@ -80,10 +80,12 @@ def get_wall_problems(request, user_id, wall_id):
         return JsonResponse({"data": serializer.data}, safe=False)
 
     if request.method == 'POST':
+        user = User.objects.get(pk=user_id)
+        wall = user.wall_set.get(pk=wall_id)
         serializer = ProblemSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({"message": "Problem created successfully"}, status=status.HTTP_201_CREATED)
         return JsonResponse({"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)  # Return errors in response
 
 def get_wall_problem_details(request, user_id, wall_id, problem_id):
