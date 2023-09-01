@@ -12,10 +12,44 @@ class WallsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wall
         fields = ["id", "name", "photo_url", "user_id"]
+# class ProblemSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Problem
+#         fields = ["id", "name", "vectors", "wall_id"]
+
+class VectorSerializer(serializers.ModelSerializer):
+    color = serializers.CharField()
+    id = serializers.CharField()
+    initialX = serializers.FloatField()
+    initialY = serializers.FloatField()
+    x = serializers.FloatField()
+    y = serializers.FloatField()
 class ProblemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Problem
-        fields = ["id", "name", "vectors", "wall_id"]
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        new_representation = {
+            "id": representation.get('id'),
+            "type": "problem",
+            "attributes": {
+                "name": representation.get('name'),
+                "vectors": [
+                    {
+                        "color": vector.get('color'),
+                        "id": vector.get('id'),
+                        "initialX": vector.get('initialX'),
+                        "initialY": vector.get('initialY')
+                    }
+                    for vector in representation.get('vectors', [])
+                ],
+                "wall_id": representation.get('wall_id'),
+                "grade": representation.get('grade')
+        }
+    }
+        return new_representation
 
     # def to_representation(self, instance):
     #     representation = super().to_representation(instance)

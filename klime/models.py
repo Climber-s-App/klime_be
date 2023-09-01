@@ -15,7 +15,8 @@ class Wall(models.Model):
         return self.name
 class Problem(models.Model):
     name = models.CharField(max_length=50)
-    vectors = models.CharField(max_length=1000)
+    vectors = models.JSONField()
+    grade = models.CharField(max_length=10)
     wall_id = models.ForeignKey(Wall, on_delete=models.CASCADE)
 
     def __str__(self):
