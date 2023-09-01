@@ -81,8 +81,7 @@ WSGI_APPLICATION = 'klime.wsgi.application'
 
 if os.environ.get("ENVIRONMENT") == "production":
     try:
-        # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS")
-        ALLOWED_HOSTS = [(host, port) for host, port in [host_port.split(':') for host_port in os.environ.get("ALLOWED_HOSTS").split()]]
+        ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
         SECRET_KEY = os.environ.get("SECRET_KEY")
         database_url = os.environ.get("DATABASE_URL")
         DATABASES = {
