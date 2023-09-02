@@ -24,6 +24,6 @@ urlpatterns = [
     path('api/v0/users/<int:user_id>/', views.user_details),
     path("api/v0/users/<int:user_id>/walls/", views.user_walls),
     path("api/v0/users/<int:user_id>/walls/<int:wall_id>/", views.get_user_wall_details),
-    path("api/v0/users/<int:user_id>/walls/<int:wall_id>/problems/", views.user_list),
+    path("api/v0/users/<int:user_id>/walls/<int:wall_id>/problems/", views.get_wall_problems),
     path("api/v0/users/<int:user_id>/walls/<int:wall_id>/problems/<int:problem_id>/", views.get_wall_problem_details)
 ]
