@@ -93,3 +93,4 @@ def get_wall_problem_details(request, user_id, wall_id, problem_id):
     wall = user.wall_set.get(pk=wall_id)
     problem = wall.problem_set.get(pk=problem_id)
     serializer = ProblemSerializer(problem, many=False)
+    return JsonResponse({"data": serializer.data}, safe=False)
