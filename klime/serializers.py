@@ -8,23 +8,27 @@ class WallSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wall
         fields = ["id", "name", "photo_url", "user"]
-class WallsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Wall
-        fields = ["id", "name", "photo_url", "user_id"]
+# class WallsSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Wall
+#         fields = ["id", "name", "photo_url", "user_id"]
 # class ProblemSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Problem
 #         fields = ["id", "name", "vectors", "wall_id"]
 
 class VectorSerializer(serializers.ModelSerializer):
-    color = serializers.CharField()
-    id = serializers.CharField()
-    initialX = serializers.FloatField()
-    initialY = serializers.FloatField()
-    x = serializers.FloatField()
-    y = serializers.FloatField()
+ class Meta:
+    model = Vector
+    fields = ['color', 'id', 'initialX', 'initialY', 'x', 'y']
+    # color = serializers.CharField()
+    # id = serializers.CharField()
+    # initialX = serializers.FloatField()
+    # initialY = serializers.FloatField()
+    # x = serializers.FloatField()
+    # y = serializers.FloatField()
 class ProblemSerializer(serializers.ModelSerializer):
+    vectors = VectorSerializer(many=True)
     class Meta:
         model = Problem
         fields = '__all__'
