@@ -83,7 +83,7 @@ def get_wall_problems(request, user_id, wall_id):
         serializer = ProblemSerializer(problem, many=True)
         return JsonResponse({"data": serializer.data}, safe=False)
 
-    if request.method == 'POST':
+    elif request.method == 'POST':
         serializer = ProblemSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
