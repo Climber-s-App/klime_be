@@ -7,7 +7,6 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.db import IntegrityError
 
-
 @api_view(["GET", "POST"])
 def user_list(request):
     if request.method == "GET":
@@ -44,7 +43,6 @@ def user_details(request, user_id):
 
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-
 
 @api_view(['GET', 'POST'])
 def user_walls(request, user_id):
@@ -84,29 +82,19 @@ def get_wall_problems(request, user_id, wall_id):
         serializer = ProblemSerializer(problem, many=True)
         return JsonResponse({"data": serializer.data}, safe=False)
 
-    # if request.method == 'POST':
-    #     serializer = ProblemSerializer(data=request.data)
-    #     if not serializer.is_valid():
-    #         print(serializer.errors)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response({"message": "Problem created successfully"}, status=status.HTTP_201_CREATED)
-
     if request.method == 'POST':
         serializer = ProblemSerializer(data=request.data)
-        # Check if the serializer is valid
         if not serializer.is_valid():
-            print(serializer.errors)  # Print validation errors for debugging
+            print(serializer.errors)
         if serializer.is_valid():
             try:
                 serializer.save()
             except IntegrityError as e:
-                print(f"Database error: {e}")  # Print database error for debugging
+                print(f"Database error: {e}")
                 return JsonResponse({"message": "Database error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
             return Response({"message": "Problem created successfully"}, status=status.HTTP_201_CREATED)
-        return JsonResponse({"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)  # Return errors in response
-
+        return JsonResponse({"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 def get_wall_problem_details(request, user_id, wall_id, problem_id):
     user = User.objects.get(pk=user_id)
