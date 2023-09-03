@@ -71,17 +71,17 @@ def get_user_wall_details(request, user_id, wall_id):
     return JsonResponse({"data": serializer.data}, safe=False)
 
 @api_view(['GET', 'POST'])
-def get_wall_problems(request, user_id, wall_id):
+def get_wall_problems(request, user_id, wall_id_id):
     if request.method == 'GET':
         user = User.objects.get(pk=user_id)
-        wall = user.wall_set.get(pk=wall_id)
+        wall = user.wall_set.get(pk=wall_id_id)
         problem = wall.problem_set
         serializer = ProblemSerializer(problem, many=True)
         return JsonResponse({"data": serializer.data}, safe=False)
 
     if request.method == 'POST':
         user = User.objects.get(pk=user_id)
-        wall = user.wall_set.get(pk=wall_id)
+        wall = user.wall_set.get(pk=wall_id_id)
         serializer = ProblemSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
