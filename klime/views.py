@@ -65,11 +65,11 @@ def user_walls(request, user_id):
             return Response({"message": "Wall created successfully"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# def get_user_wall_details(request, user_id, wall_id):
-#     user = User.objects.get(pk=user_id)
-#     wall = user.wall_set.get(pk=wall_id)
-#     serializer = WallSerializer(wall, many=False)
-#     return JsonResponse({"data": serializer.data}, safe=False)
+def get_user_wall_details(request, user_id, wall_id):
+    user = User.objects.get(pk=user_id)
+    wall = user.wall_set.get(pk=wall_id)
+    serializer = WallSerializer(wall, many=False)
+    return JsonResponse({"data": serializer.data}, safe=False)
 
 @api_view(['GET', 'POST'])
 def get_wall_problems(request, user_id, wall_id):
