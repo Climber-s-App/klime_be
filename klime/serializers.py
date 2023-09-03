@@ -20,6 +20,7 @@ class WallSerializer(serializers.ModelSerializer):
                 "user_id": representation.get("user")
             }
         }
+        return new_representation
 class WallsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wall
