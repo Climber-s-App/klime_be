@@ -58,7 +58,7 @@ class ProblemSerializer(serializers.ModelSerializer):
                     }
                     for vector in representation.get('vectors', [])
                 ],
-                "wall_id": representation.get('wall_id'),
+                "wall_id": representation.get('wall'),
                 "grade": representation.get('grade')
         }
     }
