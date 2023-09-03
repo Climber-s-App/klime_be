@@ -9,6 +9,7 @@ python -m venv .venv
 pip install -r requirements.txt
 
 # Apply migrations
+python manage.py makemigrations klime
 python manage.py migrate
 
 # # Start the Django development server
