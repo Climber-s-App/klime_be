@@ -45,27 +45,19 @@ class ProblemSerializer(serializers.ModelSerializer):
 #         model = Problem
 #         fields = '__all__'
 
-#     def to_representation(self, instance):
-#         representation = super().to_representation(instance)
-#         new_representation = {
-#             "id": representation.get('id'),
-#             "type": "problem",
-#             "attributes": {
-#                 "name": representation.get('name'),
-#                 "vectors": [
-#                     {
-#                         "color": vector.get('color'),
-#                         "id": vector.get('id'),
-#                         "initialX": vector.get('initialX'),
-#                         "initialY": vector.get('initialY')
-#                     }
-#                     for vector in representation.get('vectors', [])
-#                 ],
-#                 "wall_id": representation.get('wall'),
-#                 "grade": representation.get('grade')
-#         }
-#     }
-#         return new_representation
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        new_representation = {
+            "id": representation.get('id'),
+            "type": "problem",
+            "attributes": {
+                "name": representation.get('name'),
+                "vectors": representation.get('vectors'),
+                "wall_id": representation.get('wall'),
+                "grade": representation.get('grade')
+        }
+    }
+        return new_representation
 
     # def to_representation(self, instance):
     #     representation = super().to_representation(instance)
