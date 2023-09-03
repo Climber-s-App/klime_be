@@ -40,7 +40,7 @@ class WallsSerializer(serializers.ModelSerializer):
 class ProblemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Problem
-        fields = ["id", "name", "grade", "wall_id"]
+        fields = ["id", "name", "vectors", "grade", "wall_id"]
 #     class Meta:
 #         model = Problem
 #         fields = '__all__'
