@@ -8,6 +8,18 @@ class WallSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wall
         fields = ["id", "name", "photo_url", "user"]
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        new_representation = {
+            "id": representation.get('id'),
+            "type": "wall",
+            "attributes": {
+                "name": representation.get("name"),
+                "photo_url": representation.get("photo_url"),
+                "user_id": representation.get("user")
+            }
+        }
 class WallsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wall
