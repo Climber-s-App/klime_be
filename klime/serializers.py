@@ -21,10 +21,10 @@ class WallSerializer(serializers.ModelSerializer):
             }
         }
         return new_representation
-class WallsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Wall
-        fields = ["id", "name", "photo_url", "user_id"]
+# class WallsSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Wall
+#         fields = ["id", "name", "photo_url", "user_id"]
 # class ProblemSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Problem
@@ -40,7 +40,7 @@ class WallsSerializer(serializers.ModelSerializer):
 class ProblemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Problem
-        fields = ["id", "name", "vectors", "grade", "wall_id"]
+        fields = ["id", "name", "vectors", "grade", "wall"]
 #     class Meta:
 #         model = Problem
 #         fields = '__all__'
@@ -53,7 +53,7 @@ class ProblemSerializer(serializers.ModelSerializer):
             "attributes": {
                 "name": representation.get('name'),
                 "vectors": representation.get('vectors'),
-                "wall_id": representation.get('wall_id'),
+                "wall_id": representation.get('wall'),
                 "grade": representation.get('grade')
         }
     }
