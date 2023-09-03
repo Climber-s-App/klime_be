@@ -71,22 +71,24 @@ def get_user_wall_details(request, user_id, wall_id):
     return JsonResponse({"data": serializer.data}, safe=False)
 
 @api_view(['GET', 'POST'])
-def get_wall_problems(request, user_id, wall_id_id):
-    if request.method == 'GET':
+def get_wall_problems(request, user_id, wall_id):
+    try:
         user = User.objects.get(pk=user_id)
-        wall = user.wall_set.get(pk=wall_id_id)
-        problem = wall.problem_set
+        wall = user.wall_set.get(pk=wall_id)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        problem = wall.problem_set.all()
         serializer = ProblemSerializer(problem, many=True)
         return JsonResponse({"data": serializer.data}, safe=False)
 
     if request.method == 'POST':
-        user = User.objects.get(pk=user_id)
-        wall = user.wall_set.get(pk=wall_id_id)
         serializer = ProblemSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({"message": "Problem created successfully"}, status=status.HTTP_201_CREATED)
-        return JsonResponse({"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)  # Return errors in response
+        return JsonResponse({"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 def get_wall_problem_details(request, user_id, wall_id, problem_id):
     user = User.objects.get(pk=user_id)
