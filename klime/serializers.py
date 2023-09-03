@@ -53,7 +53,7 @@ class ProblemSerializer(serializers.ModelSerializer):
             "attributes": {
                 "name": representation.get('name'),
                 "vectors": representation.get('vectors'),
-                "wall_id": representation.get('wall'),
+                "wall_id": representation.get('wall_id'),
                 "grade": representation.get('grade')
         }
     }
