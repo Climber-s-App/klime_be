@@ -49,12 +49,12 @@ Klime is an app that enables a user to take a picture of their bouldering wall a
   <pre>
     <code>
     get '/api/v0/users/' -- Gets all users
-    get '/api/v0/users/<int:user_id>/' -- Gets specific user by ID
-    get '/api/v0/users/<int:user_id>/walls/' -- Gets specific users walls 
-    get 'api/v0/users/<int:user_id>/walls/<int:wall_id>/' -- Gets specific wall owned by user 
-    get 'api/v0/users/<int:user_id>/walls/<int:wall_id>/problems/' -- Gets all problem belonging to a users wall
-    post 'api/v0/users/<int:user_id>/walls/<int:wall_id>/problems/' -- Posts a problem to a users wall
-    get 'api/v0/users/<int:user_id>/walls/<int:wall_id>/problems/<int:problem_id>/' -- Gets a specific problem from a users wall
+    get '/api/v0/users/:user_id/' -- Gets specific user by ID
+    get '/api/v0/users/:user_id/walls/' -- Gets specific users walls 
+    get '/api/v0/users/:user_id/walls/:wall_id/' -- Gets specific wall owned by user 
+    get '/api/v0/users/:user_id/walls/:wall_id/problems/' -- Gets all problem belonging to a users wall
+    post '/api/v0/users/:user_id/walls/:wall_id/problems/' -- Posts a problem to a users wall
+    get '/api/v0/users/:user_id/walls/:wall_id>/problems/:problem_id/' -- Gets a specific problem from a users wall
     </code>
   </pre>
 </div>
