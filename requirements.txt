@@ -5,6 +5,7 @@ coverage==7.3.0
 distlib==0.3.7
 dj-database-url==2.1.0
 Django==4.2.4
+django-cors-headers==4.2.0
 djangorestframework==3.14.0
 factory-boy==3.3.0
 Faker==19.3.1

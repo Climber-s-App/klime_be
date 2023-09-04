@@ -20,11 +20,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production! Variable set on Render.com
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
+CORS_ALLOW_ALL_ORIGINS = True
 
+CORS_ALLOWED_APPS = [
+    'klime_be'
+]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corseheaders',
     'render.apps.RenderConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,6 +43,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
