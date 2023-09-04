@@ -22,14 +22,11 @@ DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ALLOWED_APPS = [
-    'klime_be'
-]
 
 # Application definition
 
 INSTALLED_APPS = [
-    'corseheaders',
+    'corsheaders',
     'render.apps.RenderConfig',
     'django.contrib.admin',
     'django.contrib.auth',
